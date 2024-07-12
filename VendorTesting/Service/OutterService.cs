@@ -19,20 +19,13 @@ namespace VendorTesting.Service
         public async Task<Test> Execute()
         {
             var test = new Test();
-
-
             var institutions = await GetProviders();
-
             var result = await GetCasesForEachInstitution(institutions);
+
             test.TestPassed = result;
-
             Validations.Validations.ValidateCaseExists(ref test);
-
             await GetResponsesFromInstitutions(test);
-
             Validations.Validations.ValidateVendorResponseExists(ref test);
-
-
 
             return test;
 
@@ -41,7 +34,6 @@ namespace VendorTesting.Service
         private async Task<List<InstitutionModel>> GetProviders()
         {
             var providers = await _providersConext.GetProviders();
-
             var institutions = new List<InstitutionModel>();
 
             providers.ForEach(p =>

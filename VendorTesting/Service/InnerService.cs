@@ -14,17 +14,15 @@ namespace VendorTesting.Service
         {
 
             Validations.Validations.ValidateVendorResponseIs200(ref test);
-            await ReadContentFromVendorResponse(test);
+            ReadContentFromVendorResponse(test);
             Validations.Validations.ValidateVendorResponseHasContent(ref test);
             CallTestJson(test);
             Validations.Validations.ValidateTestJsonResponseIs200(ref test);
-            //Validations.Validations.ValidateVendorCase(ref test);
-
 
             return test;
         }
 
-        public async Task<Test> ReadContentFromVendorResponse(Test test)
+        public Test ReadContentFromVendorResponse(Test test)
         {
             string stringObj = string.Empty;
 

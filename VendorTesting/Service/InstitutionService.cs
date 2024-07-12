@@ -6,16 +6,6 @@ namespace VendorTesting.Service
 {
     public  class InstitutionService
     {
-        public InstitutionService() 
-        {
-            
-        }
-
-        public async Task Execute()
-        {
-
-        }
-
 
         public async Task<HttpResponseMessage?> CallInstitution(CaseModel caseObj)
         {
@@ -44,7 +34,6 @@ namespace VendorTesting.Service
 
             try
             {
-                
                 using (client)
                 {
                     response = await client.GetAsync("/" + action + parameters);

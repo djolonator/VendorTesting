@@ -4,28 +4,8 @@ namespace VendorTesting.Validations
 {
     public static class Validations
     {
-
-        //public static void ValidateCaseExists(ref Test testCases)
-        //{
-        //    var failedTests = new List<CaseModel>();
-
-        //    testCases.TestPassed.ForEach(casee =>
-        //    {
-        //        if (casee.Patient == null)
-        //        {
-        //            casee.TestFailed = TestNamesConstants.VendorCaseIsFound;
-        //            failedTests.Add(casee);
-        //        }
-        //    });
-
-        //    testCases.TestPassed.RemoveAll(c => c.TestFailed != null);
-        //    testCases.TestFailed.AddRange(failedTests);
-
-        //}
-
         public static void ValidateCaseExists(ref Test testCases)
         {
-
             var failedTests = new ConcurrentBag<CaseModel>();
 
             Parallel.ForEach(testCases.TestPassed, GetParalellOptions(), (casee, token) =>
@@ -186,81 +166,6 @@ namespace VendorTesting.Validations
             testCases.TestPassed.RemoveAll(c => c.TestFailed != null);
             testCases.TestFailed.AddRange(failedTests.ToList());
         }
-
-        //public static void ValidateVendorCase(ref Test testCases)
-        //{
-        //    var failedTests = new ConcurrentBag<CaseModel>();
-
-        //    Parallel.ForEach(testCases.TestPassed, GetParalellOptions(), (casee, token) =>
-        //    {
-        //        var patientCases = casee.TestJsonSucessContent!.PatientCases;
-
-        //        if (!ValidatePatientCasesIsNotEmpty(patientCases))
-        //            casee.TestFailed = TestNamesConstants.PatientCasesExists;
-        //        else
-        //        {
-        //            var randomCase = GetRandomCaseFromList(patientCases);
-        //            //if (!ValidatePatientCaseHasRequests(randomCase))
-        //            //    casee.TestFailed = TestNamesConstants.PatientCasesExistsRequestsExists;
-        //            //else if (!ValidatePatientCasesHasRequestsHasReposnses(randomCase))
-        //            //    casee.TestFailed = TestNamesConstants.PatientCasesRequestsResponsesExists;
-        //            //else if (!ValidatePatientCasesHasRequestsHasReposnsesIsNotEmpty(randomCase))
-        //            //    casee.TestFailed = TestNamesConstants.PatientCasesRequestsResponsesIsNotEmpty;
-        //        }
-        //    });
-        //    testCases.TestPassed.RemoveAll(c => c.TestFailed != null);
-        //    testCases.TestFailed.AddRange(failedTests.ToList());
-        //}
-
-        //private static bool ValidatePatientCasesHasRequestsHasReposnsesIsNotEmpty(PatientCaseRecordsVM randomCase)
-        //{
-        //    bool isValid = false;
-
-        //    if (randomCase.Requests.FirstOrDefault()!.Responses.Count > 0)
-        //        isValid = true;
-
-        //    return isValid;
-        //}
-
-        //private static bool ValidatePatientCasesHasRequestsHasReposnses(PatientCaseRecordsVM randomCase)
-        //{
-        //    bool isValid = false;
-
-        //    if (randomCase.Requests.FirstOrDefault()!.Responses != null)
-        //        isValid = true;
-
-        //    return isValid;
-        //}
-
-        //private static bool ValidatePatientCaseHasRequests(PatientCaseRecordsVM randomCase)
-        //{
-        //    bool isValid = false;
-
-        //    if (randomCase.Requests != null && randomCase.Requests.Count > 0)
-        //        isValid = true;
-
-        //    return isValid;
-        //}
-
-        //private static PatientCaseRecordsVM GetRandomCaseFromList(List<PatientCaseRecordsVM> patientCases)
-        //{
-        //    Random random = new Random();
-        //    int index = random.Next(patientCases.Count);
-        //    var oneCase = patientCases[index];
-
-        //    return oneCase;
-
-        //}
-
-        //private static bool ValidatePatientCasesIsNotEmpty(List<PatientCaseRecordsVM> patientCases)
-        //{
-        //    bool isValid = false;
-
-        //    if (patientCases != null && patientCases.Count > 0)
-        //        isValid = true;
-
-        //    return isValid;
-        //}
 
         private static ParallelOptions GetParalellOptions()
         {
